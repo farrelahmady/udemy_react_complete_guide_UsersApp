@@ -48,7 +48,8 @@ export const AddUser = (props) => {
 	};
 
 	return (
-		<div>
+		<>
+			{/*  Error Modal only show if error state was not null/empty */}
 			{error && <ErrorModal onClick={() => setError(null)} {...error} />}
 			<Card className={style.input}>
 				<form onSubmit={addUserHandler}>
@@ -71,6 +72,6 @@ export const AddUser = (props) => {
 					<Button type="submit">Add user</Button>
 				</form>
 			</Card>
-		</div>
+		</>
 	);
 };
