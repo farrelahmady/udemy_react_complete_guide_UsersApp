@@ -4,21 +4,29 @@ import Button from "../UI/Button";
 
 import style from "./AddUser.module.css";
 import { useState } from "react";
+import { ErrorModal } from "../UI/ErrorModal";
 
 export const AddUser = (props) => {
 	const [username, setUsername] = useState("");
 	const [age, setAge] = useState("");
+	const [error, setError] = useState(null);
 
 	const addUserHandler = (event) => {
 		event.preventDefault();
 
 		//* Validation
 		if (username.trim().length === 0 || age.trim().length === 0) {
-			console.log("Please fill in all fields");
+			setError({
+				title: "Invalid Input",
+				message: "Please enter a valid username and age",
+			});
 			return;
 		}
 		if (+age < 1) {
-			console.log("Age must be a positive number");
+			setError({
+				title: "Invalid Age",
+				message: "Please enter a valid age",
+			});
 			return;
 		}
 
@@ -40,26 +48,29 @@ export const AddUser = (props) => {
 	};
 
 	return (
-		<Card className={style.input}>
-			<form onSubmit={addUserHandler}>
-				<label htmlFor="username">Username</label>
-				<input
-					type="text"
-					id="username"
-					name="username"
-					value={username}
-					onChange={changeUsernameHandler}
-				/>
-				<label htmlFor="age">Age</label>
-				<input
-					type="number"
-					id="age"
-					name="age"
-					value={age}
-					onChange={changeAgeHandler}
-				/>
-				<Button type="submit">Add user</Button>
-			</form>
-		</Card>
+		<div>
+			{error && <ErrorModal onClick={() => setError(null)} {...error} />}
+			<Card className={style.input}>
+				<form onSubmit={addUserHandler}>
+					<label htmlFor="username">Username</label>
+					<input
+						type="text"
+						id="username"
+						name="username"
+						value={username}
+						onChange={changeUsernameHandler}
+					/>
+					<label htmlFor="age">Age</label>
+					<input
+						type="number"
+						id="age"
+						name="age"
+						value={age}
+						onChange={changeAgeHandler}
+					/>
+					<Button type="submit">Add user</Button>
+				</form>
+			</Card>
+		</div>
 	);
 };
