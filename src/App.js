@@ -4,9 +4,16 @@ import UsersList from "./components/Users/UsersList";
 
 function App() {
 	const [users, setUsers] = React.useState([]);
+
+	const addUserHandler = (name, age) => {
+		setUsers((prevUsers) => {
+			return [...prevUsers, { id: Math.random().toString(), name, age }];
+		});
+	};
+
 	return (
 		<div>
-			<AddUser />
+			<AddUser onAddUser={addUserHandler} />
 			<UsersList users={users} />
 		</div>
 	);

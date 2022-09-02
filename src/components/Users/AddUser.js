@@ -5,7 +5,7 @@ import Button from "../UI/Button";
 import style from "./AddUser.module.css";
 import { useState } from "react";
 
-export const AddUser = () => {
+export const AddUser = (props) => {
 	const [username, setUsername] = useState("");
 	const [age, setAge] = useState("");
 
@@ -22,7 +22,7 @@ export const AddUser = () => {
 			return;
 		}
 
-		console.log(username, age);
+		props.onAddUser(username, age);
 
 		//* Reset form
 		setUsername("");
