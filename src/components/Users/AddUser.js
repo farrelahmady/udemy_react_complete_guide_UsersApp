@@ -1,4 +1,8 @@
 import React from "react";
+import Card from "../UI/Card";
+import Button from "../UI/Button";
+
+import style from "./AddUser.module.css";
 
 export const AddUser = () => {
 	const addUserHandler = (event) => {
@@ -6,12 +10,14 @@ export const AddUser = () => {
 	};
 
 	return (
-		<form onSubmit={addUserHandler}>
-			<label htmlFor="username">Username</label>
-			<input type="text" id="username" name="username" />
-			<label htmlFor="age">Age</label>
-			<input type="text" id="age" name="age" />
-			<button type="submit">Add user</button>
-		</form>
+		<Card className={style.input}>
+			<form onSubmit={addUserHandler}>
+				<label htmlFor="username">Username</label>
+				<input type="text" id="username" name="username" />
+				<label htmlFor="age">Age</label>
+				<input type="text" id="age" name="age" />
+				<Button type="submit">Add user</Button>
+			</form>
+		</Card>
 	);
 };
